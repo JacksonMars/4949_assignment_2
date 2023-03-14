@@ -224,6 +224,7 @@ for i in range(0, len(X.keys())):
 #     print(str(key) + ": " + str(results[key]))
 
 X_train, X_test, y_train, y_test = train_test_split(X[X_columns], y, test_size=0.25)
+print(X_train.columns)
 
 logistic_model = LogisticRegression(fit_intercept=True, solver="liblinear")
 logistic_model.fit(X_train, y_train)

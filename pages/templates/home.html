@@ -10,20 +10,97 @@
 
       <!-- This form references the homePost route. -->
     <form action="{% url 'homePost' %}" method="post">
-    {% csrf_token %}
+        {% csrf_token %}
+        <h1>Rank the following factors on a scale of 1-10, with 10 being extreme and 1 being minimal.</h1>
 
-    <h3>Years Work Experience</h3>
+        <h3>Air pollution</h3>
+        {% for pollution_choice in mynumbers %}
+            <input type="radio" name="pollution" id="pollution_choice{{ forloop.counter }}" value="{{ pollution_choice }}" checked="checked">
+            <label for="pollution_choice{{ forloop.counter }}">{{ pollution_choice }}</label><br>
+        {% endfor %}
 
-    <!-- Show radio button list named 'choice' -->
-    {% for choice in mynumbers %}
-        <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice }}">
-        <label for="choice{{ forloop.counter }}">{{ choice }}</label><br>
-    {% endfor %}
+        <h3>Alcohol use</h3>
+        {% for alcohol_choice in mynumbers %}
+            <input type="radio" name="alcohol" id="alcohol_choice{{ forloop.counter }}" value="{{ alcohol_choice }}" checked="checked">
+            <label for="alcohol_choice{{ forloop.counter }}">{{ alcohol_choice }}</label><br>
+        {% endfor %}
 
-    <h3>GMAT Score</h3>
-    <input type="text" id="gmat" name="gmat"><br><br>
+        <h3>Dust allergies</h3>
+        {% for allergy_choice in mynumbers %}
+            <input type="radio" name="allergies" id="allergy_choice{{ forloop.counter }}" value="{{ allergy_choice }}" checked="checked">
+            <label for="allergy_choice{{ forloop.counter }}">{{ allergy_choice }}</label><br>
+        {% endfor %}
 
-    <input type="submit" value="POST YOUR CHOICE">
+        <h3>Occupational hazards</h3>
+        {% for hazards_choice in mynumbers %}
+            <input type="radio" name="hazards" id="hazards_choice{{ forloop.counter }}" value="{{ hazards_choice }}" checked="checked">
+            <label for="hazards_choice{{ forloop.counter }}">{{ hazards_choice }}</label><br>
+        {% endfor %}
+
+        <h3>Obesity</h3>
+        {% for obesity_choice in mynumbers %}
+            <input type="radio" name="obesity" id="obesity_choice{{ forloop.counter }}" value="{{ obesity_choice }}" checked="checked">
+            <label for="obesity_choice{{ forloop.counter }}">{{ obesity_choice }}</label><br>
+        {% endfor %}
+
+        <h3>Passive smoking</h3>
+        {% for passive_choice in mynumbers %}
+            <input type="radio" name="passive_smoke" id="passive_choice{{ forloop.counter }}" value="{{ passive_choice }}" checked="checked">
+            <label for="passive_choice{{ forloop.counter }}">{{ passive_choice }}</label><br>
+        {% endfor %}
+
+        <h3>Chest pain</h3>
+        {% for chest_choice in mynumbers %}
+            <input type="radio" name="chest_pain" id="chest_choice{{ forloop.counter }}" value="{{ chest_choice }}" checked="checked">
+            <label for="chest_choice{{ forloop.counter }}">{{ chest_choice }}</label><br>
+        {% endfor %}
+
+        <h3>Coughing of blood</h3>
+        {% for coughing_choice in mynumbers %}
+            <input type="radio" name="blood_cough" id="coughing_choice{{ forloop.counter }}" value="{{ coughing_choice }}" checked="checked">
+            <label for="coughing_choice{{ forloop.counter }}">{{ coughing_choice }}</label><br>
+        {% endfor %}
+
+        <h3>Fatigue</h3>
+        {% for fatigue_choice in mynumbers %}
+            <input type="radio" name="fatigue" id="fatigue_choice{{ forloop.counter }}" value="{{ fatigue_choice }}" checked="checked">
+            <label for="fatigue_choice{{ forloop.counter }}">{{ fatigue_choice }}</label><br>
+        {% endfor %}
+
+        <h3>Wheezing</h3>
+        {% for wheezing_choice in mynumbers %}
+            <input type="radio" name="wheezing" id="wheezing_choice{{ forloop.counter }}" value="{{ wheezing_choice }}" checked="checked">
+            <label for="wheezing_choice{{ forloop.counter }}">{{ wheezing_choice }}</label><br>
+        {% endfor %}
+
+        <h3>Clubbing of fingernails</h3>
+        {% for clubbing_choice in mynumbers %}
+            <input type="radio" name="clubbing" id="clubbing_choice{{ forloop.counter }}" value="{{ clubbing_choice }}" checked="checked">
+            <label for="clubbing_choice{{ forloop.counter }}">{{ clubbing_choice }}</label><br>
+        {% endfor %}
+
+        <h3>Frequent cold</h3>
+        {% for cold_choice in mynumbers %}
+            <input type="radio" name="frequent_cold" id="cold_choice{{ forloop.counter }}" value="{{ cold_choice }}" checked="checked">
+            <label for="cold_choice{{ forloop.counter }}">{{ cold_choice }}</label><br>
+        {% endfor %}
+
+        <h3>Dry cough</h3>
+        {% for dry_choice in mynumbers %}
+            <input type="radio" name="dry_cough" id="dry_choice{{ forloop.counter }}" value="{{ dry_choice }}" checked="checked">
+            <label for="dry_choice{{ forloop.counter }}">{{ dry_choice }}</label><br>
+        {% endfor %}
+
+        <h3>Snoring</h3>
+        {% for snoring_choice in mynumbers %}
+            <input type="radio" name="snoring" id="snoring_choice{{ forloop.counter }}" value="{{ snoring_choice }}" checked="checked">
+            <label for="snoring_choice{{ forloop.counter }}">{{ snoring_choice }}</label><br>
+        {% endfor %}
+
+        <h3>Enter your age</h3>
+        <input type="text" id="age" name="age"><br><br>
+
+        <input type="submit" value="POST YOUR CHOICE">
     </form>
     <!-- End of form. -->
 
