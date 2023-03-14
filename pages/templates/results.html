@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    {% block content %}
+      <h1>Results page</h1>
+      You entered the following information:<br/>
+      Years work exerience: {{choice}}<br/>
+      GMAT Score: {{gmat}}
+      Prediction: {{prediction}}
+    {% endblock content %}
+</body>
+</html>
