@@ -3,54 +3,22 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import train_test_split, KFold
 import numpy as np
 from sklearn import metrics
-from sklearn.feature_selection import RFE, SelectKBest, f_regression
+from sklearn.feature_selection import RFE
 import pickle
 import matplotlib.pyplot as plt
 import seaborn as sb
 
 
 def setup_dataframe():
-    # Show all columns.
     pd.set_option("display.max_columns", None)
     pd.set_option("display.width", 1000)
 
-    # Prepare the data.
-    # Get the housing data
     df = pd.read_csv(
         r"C:\Users\jmars\PycharmProjects\4949_assignment_2\cancer patient data sets.csv",
         encoding="ISO-8859-1",
     )
     df.loc[df["Level"] != "High", "Level"] = "Low"
-    # df.loc[df['Level'] != 'High', 'Level'] = 0
-    # df.loc[df['Level'] == 'High', 'Level'] = 1
 
-    numeric = df[
-        [
-            "Age",
-            "Air Pollution",
-            "Alcohol use",
-            "Dust Allergy",
-            "OccuPational Hazards",
-            "Genetic Risk",
-            "chronic Lung Disease",
-            "Balanced Diet",
-            "Obesity",
-            "Smoking",
-            "Passive Smoker",
-            "Chest Pain",
-            "Coughing of Blood",
-            "Fatigue",
-            "Weight Loss",
-            "Shortness of Breath",
-            "Wheezing",
-            "Swallowing Difficulty",
-            "Clubbing of Finger Nails",
-            "Frequent Cold",
-            "Dry Cough",
-            "Snoring",
-            "Level",
-        ]
-    ]
     numeric_not_binned = df[
         [
             "Age",
@@ -243,7 +211,6 @@ def create_plots(df):
     # plt.show()
 
     corr = df.corr()
-    #plt.figure(figsize=(4,4))
     hm = sb.heatmap(corr, cmap="Blues")
     plt.tight_layout()
     plt.show()
@@ -292,6 +259,7 @@ print(X_columns)
 
 test_logistic_model(df, X_columns)
 
+# The below code should be uncommented if you want to generate a pkl file for the model
 # results = {}
 # for i in range(4, len(X.columns)):
 #     result = test_rfe_features(i, X, y, df)
