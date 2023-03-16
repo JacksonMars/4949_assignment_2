@@ -5,6 +5,8 @@ import numpy as np
 from sklearn import metrics
 from sklearn.feature_selection import RFE, SelectKBest, f_regression
 import pickle
+import matplotlib.pyplot as plt
+import seaborn as sb
 
 
 def setup_dataframe():
@@ -173,6 +175,80 @@ def test_rfe_features(num_features, X, y, final_df):
     return test_logistic_model(final_df, X_columns)
 
 
+def create_plots(df):
+    # plt.subplots(nrows=3, ncols=3)
+    #
+    # plt.subplot(3, 3, 1)
+    # wheezing = df['Wheezing']
+    # plt.hist(wheezing)
+    # plt.title("Wheezing")
+    # plt.xlabel("Wheezing")
+    # plt.ylabel("Frequency")
+    #
+    # plt.subplot(3, 3, 2)
+    # wheezing = df['Clubbing of Finger Nails']
+    # plt.hist(wheezing)
+    # plt.title("Clubbing of Finger Nails")
+    # plt.xlabel("Clubbing of Finger Nails")
+    # plt.ylabel("Frequency")
+    #
+    # plt.subplot(3, 3, 4)
+    # cold = df['Frequent Cold']
+    # plt.hist(cold)
+    # plt.title("Frequent Cold")
+    # plt.xlabel("Frequent Cold")
+    # plt.ylabel("Frequency")
+    #
+    # plt.subplot(3, 3, 5)
+    # cough = df['Dry Cough']
+    # plt.hist(cough)
+    # plt.title("Dry Cough")
+    # plt.xlabel("Dry Cough")
+    # plt.ylabel("Frequency")
+    #
+    # plt.subplot(3, 3, 7)
+    # snoring = df['Snoring']
+    # plt.hist(snoring)
+    # plt.title("Snoring")
+    # plt.xlabel("Snoring")
+    # plt.ylabel("Frequency")
+    #
+    # plt.subplot(3, 3, 8)
+    # age = df['Age']
+    # plt.hist(age)
+    # plt.title("Age")
+    # plt.xlabel("Age")
+    # plt.ylabel("Frequency")
+
+    # high_risk = df[df['Air Pollution'] > 1]
+    # high_risk = high_risk[high_risk['Alcohol use'] > 1]
+    # high_risk = high_risk[high_risk['Dust Allergy'] > 1]
+    # high_risk = high_risk[high_risk['OccuPational Hazards'] > 1]
+    # high_risk = high_risk[high_risk['Obesity'] > 1]
+    # high_risk = high_risk[high_risk['Passive Smoker'] > 1]
+    # high_risk = high_risk[high_risk['Chest Pain'] > 1]
+    # high_risk = high_risk[high_risk['Coughing of Blood'] > 1]
+    # high_risk = high_risk[high_risk['Fatigue'] > 1]
+    # high_risk = high_risk[high_risk['Clubbing of Finger Nails'] > 1]
+    # high_risk = high_risk[high_risk['Frequent Cold'] > 1]
+    # high_risk = high_risk[high_risk['Dry Cough'] > 1]
+    # high_risk = high_risk[high_risk['Snoring'] > 1]
+    #
+    # values = np.array([high_risk['Level'].value_counts()['High'], high_risk['Level'].value_counts()['Low']])
+    # labels = ['High', 'Low']
+    # plt.pie(values, labels=labels, autopct='%1.0f%%')
+    # plt.title("High Risk vs. Low Risk for Patients With Some Factors in Every Category")
+    #
+    # plt.tight_layout()
+    # plt.show()
+
+    corr = df.corr()
+    #plt.figure(figsize=(4,4))
+    hm = sb.heatmap(corr, cmap="Blues")
+    plt.tight_layout()
+    plt.show()
+
+
 df = setup_dataframe()
 
 X = df[
@@ -212,8 +288,9 @@ X_columns = []
 for i in range(0, len(X.keys())):
     if rfe.support_[i]:
         X_columns.append(X.keys()[i])
+print(X_columns)
 
-#test_logistic_model(df, X_columns)
+test_logistic_model(df, X_columns)
 
 # results = {}
 # for i in range(4, len(X.columns)):
@@ -223,43 +300,45 @@ for i in range(0, len(X.keys())):
 # for key in results.keys():
 #     print(str(key) + ": " + str(results[key]))
 
-X_train, X_test, y_train, y_test = train_test_split(X[X_columns], y, test_size=0.25)
-print(X_train.columns)
+# X_train, X_test, y_train, y_test = train_test_split(X[X_columns], y, test_size=0.25)
+# print(X_train.columns)
+#
+# logistic_model = LogisticRegression(fit_intercept=True, solver="liblinear")
+# logistic_model.fit(X_train, y_train)
+#
+# # Save the model.
+# with open('model_pkl', 'wb') as files:
+#     pickle.dump(logistic_model, files)
+#
+# # load saved model
+# with open('model_pkl' , 'rb') as f:
+#     loadedModel = pickle.load(f)
+#
+# y_pred = loadedModel.predict(X_test)
+# y_prob = loadedModel.predict_proba(X_test)
+#
+# y_test_array = np.array(y_test["Level"])
+# cm = pd.crosstab(
+#     y_test_array, y_pred, rownames=["Actual"], colnames=["Predicted"]
+# )
+#
+# accuracy = metrics.accuracy_score(y_test, y_pred)
+# print("\nAccuracy: ", accuracy)
+# print("\nConfusion Matrix")
+# print(cm)
+#
+# FN = cm["Low"]["High"]
+# FP = cm["High"]["Low"]
+# TP = cm["High"]["High"]
+#
+# print("")
+# precision = TP / (FP + TP)
+# print("\nPrecision:  " + str(round(precision, 3)))
+#
+# recall = TP / (TP + FN)
+# print("Recall:     " + str(round(recall, 3)))
+#
+# F1 = 2 * ((precision * recall) / (precision + recall))
+# print("F1:         " + str(round(F1, 3)))
 
-logistic_model = LogisticRegression(fit_intercept=True, solver="liblinear")
-logistic_model.fit(X_train, y_train)
-
-# Save the model.
-with open('model_pkl', 'wb') as files:
-    pickle.dump(logistic_model, files)
-
-# load saved model
-with open('model_pkl' , 'rb') as f:
-    loadedModel = pickle.load(f)
-
-y_pred = loadedModel.predict(X_test)
-y_prob = loadedModel.predict_proba(X_test)
-
-y_test_array = np.array(y_test["Level"])
-cm = pd.crosstab(
-    y_test_array, y_pred, rownames=["Actual"], colnames=["Predicted"]
-)
-
-accuracy = metrics.accuracy_score(y_test, y_pred)
-print("\nAccuracy: ", accuracy)
-print("\nConfusion Matrix")
-print(cm)
-
-FN = cm["Low"]["High"]
-FP = cm["High"]["Low"]
-TP = cm["High"]["High"]
-
-print("")
-precision = TP / (FP + TP)
-print("\nPrecision:  " + str(round(precision, 3)))
-
-recall = TP / (TP + FN)
-print("Recall:     " + str(round(recall, 3)))
-
-F1 = 2 * ((precision * recall) / (precision + recall))
-print("F1:         " + str(round(F1, 3)))
+# create_plots(df[X_columns])

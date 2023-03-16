@@ -3,31 +3,125 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+
+    <style type="text/css">
+        body {
+            padding-bottom: 100px;
+            padding-top: 50px;
+        }
+
+        .center {
+            width: 80%;
+            margin: auto;
+            max-width: 1000px;
+        }
+    </style>
 </head>
 <body>
-<!--    {% block content %}-->
-<!--      <h1>Results page</h1>-->
-<!--      You entered the following information:<br/>-->
-<!--      Air pollution: {{pollution_choice}}<br/>-->
-<!--      Age: {{age}}-->
-<!--&lt;!&ndash;      Prediction: {{prediction}}&ndash;&gt;-->
-<!--    {% endblock content %}-->
-    <h1>Results page</h1>
-    Air pollution: {{pollution}}<br/>
-    Alcohol usage: {{alcohol}}<br/>
-    Dust allergies: {{allergies}}<br/>
-    Occupational hazards: {{hazards}}<br/>
-    Obesity: {{obesity}}<br/>
-    Passive smoking: {{passive_smoke}}<br/>
-    Chest pain: {{chest_pain}}<br/>
-    Coughing blood: {{blood_cough}}<br/>
-    Fatigue: {{fatigue}}<br/>
-    Wheezing: {{wheezing}}<br/>
-    Clubbing of fingernails: {{clubbing}}<br/>
-    Frequent cold: {{frequent_cold}}<br/>
-    Dry cough: {{dry_cough}}<br/>
-    Snoring: {{snoring}}<br/>
-    Age: {{age}}<br/>
-    Prediction: {{prediction}}
+    {% extends "base.html" %}
+    {% block content %}
+
+    <div class="center">
+        <h1>Test results</h1>
+        <p>Below is a table consisting of the risk factors and the value you've assigned to each of them.</p>
+
+        <table class="table">
+            <tr>
+                <th scope="col">Risk factor name</th>
+                <th scope="col">Associated value</th>
+            </tr>
+
+            <tr>
+                <td scope="col">Air pollution</td>
+                <td scope="col">{{pollution}}</td>
+            </tr>
+
+            <tr>
+                <td scope="col">Alcohol usage</td>
+                <td scope="col">{{alcohol}}</td>
+            </tr>
+
+            <tr>
+                <td scope="col">Dust allergies</td>
+                <td scope="col">{{allergies}}</td>
+            </tr>
+
+            <tr>
+                <td scope="col">Occupational hazards</td>
+                <td scope="col">{{hazards}}</td>
+            </tr>
+
+            <tr>
+                <td scope="col">Obesity</td>
+                <td scope="col">{{obesity}}</td>
+            </tr>
+
+            <tr>
+                <td scope="col">Passive smoking</td>
+                <td scope="col">{{passive_smoke}}</td>
+            </tr>
+
+            <tr>
+                <td scope="col">Chest pain</td>
+                <td scope="col">{{chest_pain}}</td>
+            </tr>
+
+            <tr>
+                <td scope="col">Coughing blood</td>
+                <td scope="col">{{blood_cough}}</td>
+            </tr>
+
+            <tr>
+                <td scope="col">Fatigue</td>
+                <td scope="col">{{fatigue}}</td>
+            </tr>
+
+            <tr>
+                <td scope="col">Wheezing</td>
+                <td scope="col">{{wheezing}}</td>
+            </tr>
+
+            <tr>
+                <td scope="col">Clubbing of fingernails</td>
+                <td scope="col">{{clubbing}}</td>
+            </tr>
+
+            <tr>
+                <td scope="col">Frequent cold</td>
+                <td scope="col">{{frequent_cold}}</td>
+            </tr>
+
+            <tr>
+                <td scope="col">Dry cough</td>
+                <td scope="col">{{dry_cough}}</td>
+            </tr>
+
+            <tr>
+                <td scope="col">Snoring</td>
+                <td scope="col">{{snoring}}</td>
+            </tr>
+
+            <tr>
+                <td scope="col">Age</td>
+                <td scope="col">{{age}}</td>
+            </tr>
+        </table>
+
+        {% if prediction == 'Low' %}
+        <h2>Your risk factor is: Low</h2>
+        <p>It appears that you have a low risk for lung cancer. You share few of the common risk factors seen among
+            lung cancer patients. However, this survey just looks at the common risk factors. For a more in-depth test,
+            consult a doctor.</p>
+        {% else %}
+        <h2>Your risk factor is: High</h2>
+        <p>It appears that you may be at a higher risk than average for lung cancer. You share some of the common
+            factors seen among lung cancer patients. However, this test is by no means comprehensive. It is recommended
+            to consult with a doctor about potential risk factors and how to fix them.</p>
+        {% endif %}
+
+        <a href="{% url 'home' %}">Take the test again</a>
+    </div>
+
+    {% endblock content %}
 </body>
 </html>
